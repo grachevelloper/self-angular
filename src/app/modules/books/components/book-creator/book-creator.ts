@@ -6,9 +6,9 @@ export interface CreateBookDTO extends Omit<Book, 'id'> {}
 export interface UpdateBookDTO extends Partial<CreateBookDTO> {}
 
 const VOID_STATE: CreateBookDTO = {
-      title: '',
-      author: '',
-      status: 'wishlist'
+  title: '',
+  author: '',
+  status: 'wishlist'
 }
 
 
