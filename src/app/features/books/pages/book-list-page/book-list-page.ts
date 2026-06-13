@@ -2,9 +2,10 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { BookCardComponent } from '../../components/book-card-component/book-card-component';
 import { BookCreatorComponent, CreateBookDTO } from '../../components/book-creator-component/book-creator-component';
 import { BookFiltersComponent } from '../../components/book-filters-component/book-filters-component';
-import { BookStatus, Book } from '../../model';
+import { BookStatus, Book, BookFilter } from '../../model';
 import { BookService } from '../../services';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'app-book-list-page',
@@ -14,17 +15,23 @@ import { Router } from '@angular/router';
 })
 export class BookListPage {
     private router = inject(Router);
+    private activatedRoute = inject(ActivatedRoute);
+    private queryParamMap = toSignal(this.activatedRoute.queryParamMap);
 
     protected readonly booksService = inject(BookService)
 
-    protected readonly searchQuery = signal('');
-    protected readonly selectedStatus = signal<BookStatus | 'all'>('all');
+    protected searchQuery = computed(() => {
+        return this.queryParamMap()?.get('search') ?? '';
+    });
+    protected selectedStatus = computed(() => {
+        return this.getInitialStatus(this.queryParamMap()?.get('status'));
+    });
+
 
     protected readonly filteredBooks = computed(() => {
         let filteredBooks = this.booksService.books();
 
         const query = this.searchQuery().trim().toLowerCase();
-
         const status = this.selectedStatus()
 
         if (query) {
@@ -39,13 +46,26 @@ export class BookListPage {
         }
 
         return filteredBooks.filter((book: Book) => book.status === status);
-
     });
 
-    protected setStatus(newStatus: BookStatus): void {
-        this.selectedStatus.update((currentStatus) =>
-            currentStatus === newStatus ? 'all' : newStatus
-        );
+    protected handlChangeSearch(search: string): void {
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { search, page: 1 },
+            queryParamsHandling: 'merge'
+        })
+    }
+
+    protected handleChangeStatus(status: BookStatus): void {
+        let newStatus = status as BookFilter | undefined;
+        if (status === this.selectedStatus()) {
+            newStatus = undefined
+        }
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { status: newStatus, page: 1 },
+            queryParamsHandling: 'merge'
+        })
     }
 
     protected changeBookStatus(book: Book): void {
@@ -67,5 +87,16 @@ export class BookListPage {
 
     protected handleBookClick(id: number): void {
         this.router.navigateByUrl(`/${String(id)}`)
+    }
+
+    private getInitialStatus(status?: string | null): BookFilter {
+        switch (status) {
+            case 'wishlist':
+            case 'reading':
+            case 'finished':
+                return status;
+            default:
+                return 'all'
+        }
     }
 }

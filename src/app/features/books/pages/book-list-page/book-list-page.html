@@ -1,31 +1,34 @@
 <main class="main">
-  <app-book-filters
-    [selectedStatus]="selectedStatus()"
-    [searchQuery]="searchQuery()"
-    (statusSelected)="setStatus($event)"
-    (searchChanged)="searchQuery.set($event)"
-  />
-  <div class="row">
-    @let books = filteredBooks();
+    <app-book-filters
+        [selectedStatus]="selectedStatus()"
+        [searchQuery]="searchQuery()"
+        (statusSelected)="handleChangeStatus($event)"
+        (searchChanged)="handlChangeSearch($event)"
+    />
+    <div class="row">
+        @let books = filteredBooks();
 
-    @if (books.length) {
-      @for (book of books; track book.id) {
-        <app-book-card
-            [book]="book"
-            (clicked)='handleBookClick(book.id)'
-            (statusClicked)="changeBookStatus($event)"
-        />
-      }
-    } @else {
-      <h4>Книги не найдены</h4>
-    }
-  </div>
-  <button class='book-create-button'
-  (click)='onChangeBookModal()'
-  >Создать запись</button>
-  <app-book-creator-component
-    [isOpen]="isCreateBookModalOpen()"
-    (close)="onChangeBookModal()"
-    (submitBook)="onSubmitBookModal($event)"
-  />
+        @if (books.length) {
+            @for (book of books; track book.id) {
+                <app-book-card
+                    [book]="book"
+                    (clicked)="handleBookClick(book.id)"
+                    (statusClicked)="changeBookStatus($event)"
+                />
+            }
+        } @else {
+            <h4>Книги не найдены</h4>
+        }
+    </div>
+    <button
+        class="book-create-button"
+        (click)="onChangeBookModal()"
+    >
+        Создать запись
+    </button>
+    <app-book-creator-component
+        [isOpen]="isCreateBookModalOpen()"
+        (close)="onChangeBookModal()"
+        (submitBook)="onSubmitBookModal($event)"
+    />
 </main>
