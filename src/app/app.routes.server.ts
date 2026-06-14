@@ -4,6 +4,7 @@ export const serverRoutes: ServerRoute[] = [
     {
         path: ':id',
         renderMode: RenderMode.Server,
+
     },
     {
         path: '**',
