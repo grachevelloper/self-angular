@@ -1,10 +1,9 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject } from '@angular/core';
 import { Book } from '../../model';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../services';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 
 @Component({
     selector: 'app-book-details-page',
@@ -28,25 +27,13 @@ export class BookDetailsPage {
     private router = inject(Router);
     private bookService = inject(BookService);
     private route = inject(ActivatedRoute);
+    private data = toSignal(this.route.data)
+
     private titleService = inject(Title);
 
-    private readonly routeId = toSignal(
-        this.route.paramMap.pipe(
-            map((params) => {
-                const id = Number(params.get('id'));
-                return Number.isNaN(id) ? null : id;
-            })
-        ),
-        { initialValue: null }
-    );
-
-    protected readonly book = computed(() => {
-        const id = this.routeId();
-        if (id === null) {
-            return undefined;
-        }
-        return this.bookService.getBookById(id);
-    });
+    protected readonly book = computed(() => this.data()?.['book'] as Book | undefined);
+    protected readonly isLoading = this.bookService.loadingCurrentBook;
+    protected readonly error = this.bookService.loadCurrentBookError;
 
     protected handleBackClick() {
         this.router.navigate(['..'], { relativeTo: this.route });

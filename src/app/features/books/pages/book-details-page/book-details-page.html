@@ -1,12 +1,18 @@
 <main>
     <button (click)="handleBackClick()">Назад</button>
-    @if (!book()) {
+
+    @if (isLoading()) {
+        <h3>Загрузка...</h3>
+    } @else if (error()) {
+        <h3>Ошибка!</h3>
+        <p>{{ error() }}</p>
+    } @else if (!book()) {
         <h3>Книга не найдена!</h3>
     } @else {
-        <h3>{{book()?.title}}</h3>
+        <h3>{{ book()?.title }}</h3>
 
-        <h5>{{book()?.author}}</h5>
+        <h5>{{ book()?.author }}</h5>
 
-        <p>{{book()?.status}}</p>
+        <p>{{ book()?.status }}</p>
     }
 </main>

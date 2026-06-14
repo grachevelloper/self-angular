@@ -1,5 +1,5 @@
 import { computed, inject, Injectable, signal, WritableSignal } from '@angular/core';
-import { catchError, defer, EMPTY, finalize, Observable, tap } from 'rxjs';
+import { catchError, defer, EMPTY, finalize, Observable, of, tap } from 'rxjs';
 import { CreateBookDTO, UpdateBookDTO } from '../../components/book-creator-component/book-creator-component';
 import { Book } from '../../model';
 import { BookApiService } from '../book-api-service/book-api-service';
@@ -11,17 +11,21 @@ export class BookService {
     private readonly api = inject(BookApiService);
 
     private readonly booksState = signal<Book[]>([]);
+    private readonly currentBookState = signal<Book | undefined>(undefined);
     private readonly updatingBookIdsState = signal<Set<number>>(new Set());
     private readonly deletingBookIdsState = signal<Set<number>>(new Set());
 
     public readonly books = this.booksState.asReadonly();
+    public readonly currentBook = this.currentBookState.asReadonly();
     public readonly updatingBookIds = this.updatingBookIdsState.asReadonly();
     public readonly deletingBookIds = this.deletingBookIdsState.asReadonly();
 
     public readonly loadingBooks = signal(false);
+    public readonly loadingCurrentBook = signal(false);
     public readonly creatingBook = signal(false);
 
-    public readonly loadError = signal<string | null>(null);
+    public readonly loadCurrentBookError = signal<string | null>(null);
+    public readonly loadBooksError = signal<string | null>(null);
     public readonly createError = signal<string | null>(null);
     public readonly updateError = signal<string | null>(null);
     public readonly deleteError = signal<string | null>(null);
@@ -36,15 +40,39 @@ export class BookService {
 
     public loadBooks(): void {
         this.loadingBooks.set(true);
-        this.loadError.set(null);
+        this.loadBooksError.set(null);
 
         this.api.getAll()
             .pipe(finalize(() => this.loadingBooks.set(false)))
             .subscribe({
                 next: (books) => this.booksState.set(books),
-                error: () => this.loadError.set('Не удалось загрузить книги'),
+                error: () => this.loadBooksError.set('Не удалось загрузить книги'),
             });
     }
+
+    public loadBookById(id: number): void {
+        this.loadBookByIdRequest(id).subscribe()
+
+    }
+
+    private loadBookByIdRequest(id: number): Observable<Book | undefined> {
+        this.loadingCurrentBook.set(true);
+        this.loadCurrentBookError.set(null);
+
+        return this.api.getById(id).pipe(
+            tap((book) => this.currentBookState.set(book)),
+            catchError(() => {
+                this.loadCurrentBookError.set('Не удалось загрузить книгу');
+                return of(undefined);
+            }),
+            finalize(() => this.loadingCurrentBook.set(false))
+        );
+    }
+
+    public resolveBookById(id: number): Observable<Book | undefined> {
+        return this.loadBookByIdRequest(id);
+    }
+
 
     public changeBookStatus(book: Book): void {
         const { id, status } = book;

@@ -13,8 +13,8 @@
 
         @if (booksService.loadingBooks()) {
             <p>Loading...</p>
-        } @else if (booksService.loadError()) {
-            <p class="error">{{ booksService.loadError() }}</p>
+        } @else if (booksService.loadBooksError()) {
+            <p class="error">{{ booksService.loadBooksError() }}</p>
         } @else if (books.length === 0) {
             <p class="empty">Книги не найдены</p>
         } @else {

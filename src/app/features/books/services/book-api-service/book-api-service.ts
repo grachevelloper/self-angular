@@ -31,7 +31,7 @@ export class BookApiService {
         // Mocks
 
         return of(this.books.find((book) => book.id === id)).pipe(
-            delay(200)
+            delay(2000)
         )
         // Mocks
         // return this.http.get<Book>(`${this.baseUrl}/${id}`);
