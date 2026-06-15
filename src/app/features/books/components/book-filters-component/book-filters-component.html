@@ -2,31 +2,24 @@
     <input
         type="search"
         placeholder="Search books"
-        #searchInput
-        [value]="searchQuery()"
+        [formControl]="searchControl"
     />
     <button
-        (click)="searchChanged.emit(searchInput.value)"
-        class="nav-button"
-    >
-        Найти
-    </button>
-    <button
-        (click)="statusSelected.emit('wishlist')"
+        (click)="onStatusSelected('wishlist')"
         class="nav-button"
         [class.nav-button_selected]="selectedStatus() === 'wishlist'"
     >
         Вишлист
     </button>
     <button
-        (click)="statusSelected.emit('reading')"
+        (click)="onStatusSelected('reading')"
         class="nav-button"
         [class.nav-button_selected]="selectedStatus() === 'reading'"
     >
         Читаю
     </button>
     <button
-        (click)="statusSelected.emit('finished')"
+        (click)="onStatusSelected('finished')"
         class="nav-button"
         [class.nav-button_selected]="selectedStatus() === 'finished'"
     >

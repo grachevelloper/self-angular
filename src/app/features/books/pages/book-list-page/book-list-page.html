@@ -3,7 +3,7 @@
         [selectedStatus]="selectedStatus()"
         [searchQuery]="searchQuery()"
         (statusSelected)="handleChangeStatus($event)"
-        (searchChanged)="handlChangeSearch($event)"
+        (searchChanged)="handleChangeSearch($event)"
     />
     @if (booksService.actionError()) {
         <p class="error">{{ booksService.actionError() }}</p>

@@ -48,7 +48,7 @@ export class BookListPage {
         return filteredBooks.filter((book: Book) => book.status === status);
     });
 
-    protected handlChangeSearch(search: string): void {
+    protected handleChangeSearch(search: string): void {
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
             queryParams: { search: search || null, page: 1 },
