@@ -1,10 +1,13 @@
-export type BookStatus = 'reading' | 'finished' | 'wishlist';
+export type BookStatus = 'reading' | 'finished' | 'in_wishlist';
 
 export interface Book {
-  id: number;
-  title: string;
-  author: string;
-  status: BookStatus;
+    id: string;
+    title: string;
+    author: string;
+    status: BookStatus;
+    publishedAt: Date;
+    createdAt: Date
+    updatedAt?: Date
 }
 
 export type BookFilter = BookStatus | 'all';

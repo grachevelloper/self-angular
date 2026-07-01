@@ -1,15 +1,20 @@
 import { Component, effect, input, output } from '@angular/core';
-import { type Book, type BookStatus } from '../../model';
+import { type BookStatus } from '../../model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 
-
-export interface CreateBookDTO extends Omit<Book, 'id'> { }
+export interface CreateBookDTO {
+    title: string;
+    author: string;
+    status: BookStatus;
+    publishedAt: Date;
+}
 export interface UpdateBookDTO extends Partial<CreateBookDTO> { }
 
 const VOID_STATE: CreateBookDTO = {
     title: '',
     author: '',
-    status: 'wishlist'
+    status: 'in_wishlist',
+    publishedAt: new Date(Date.now()),
 }
 
 
@@ -26,30 +31,38 @@ export class BookCreatorComponent {
     public readonly submitBook = output<CreateBookDTO>();
 
     protected bookForm = new FormGroup({
-        title: new FormControl('', [
+        title: new FormControl({ value: '', disabled: false }, [
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(300)
         ]),
-        author: new FormControl('', [
+        author: new FormControl({ value: '', disabled: false }, [
             Validators.required,
             Validators.minLength(3),
             Validators.maxLength(150)
         ]),
-        status: new FormControl<BookStatus>('wishlist', [
+        status: new FormControl<BookStatus>({ value: 'in_wishlist', disabled: false }, [
+            Validators.required,
+        ]),
+        publishedAt: new FormControl<Date>({ value: new Date(), disabled: false }, [
             Validators.required,
         ])
     })
 
-    private readonly resetClosedForm = effect(() => {
-        if (!this.isOpen()) {
-            this.bookForm.setValue(VOID_STATE);
+
+    private readonly toggleFormDisabled = effect(() => {
+        if (this.isSubmitting()) {
+            this.bookForm.disable();
+        } else {
+            this.bookForm.enable();
         }
     });
+
 
     get title() { return this.bookForm.get('title'); }
     get author() { return this.bookForm.get('author'); }
     get status() { return this.bookForm.get('status'); }
+    get publishedAt() { return this.bookForm.get('status'); }
 
     public onSubmit(): void {
         const form = this.bookForm;

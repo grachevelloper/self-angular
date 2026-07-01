@@ -90,13 +90,13 @@ export class BookListPage {
         this.booksService.deleteBookById(book.id).subscribe();
     }
 
-    protected handleBookClick(id: number): void {
+    protected handleBookClick(id: string): void {
         this.router.navigateByUrl(`/${String(id)}`)
     }
 
     private getInitialStatus(status?: string | null): BookFilter {
         switch (status) {
-            case 'wishlist':
+            case 'in_wishlist':
             case 'reading':
             case 'finished':
                 return status;

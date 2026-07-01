@@ -12,8 +12,8 @@ export class BookService {
 
     private readonly booksState = signal<Book[]>([]);
     private readonly currentBookState = signal<Book | undefined>(undefined);
-    private readonly updatingBookIdsState = signal<Set<number>>(new Set());
-    private readonly deletingBookIdsState = signal<Set<number>>(new Set());
+    private readonly updatingBookIdsState = signal<Set<string>>(new Set());
+    private readonly deletingBookIdsState = signal<Set<string>>(new Set());
 
     public readonly books = this.booksState.asReadonly();
     public readonly currentBook = this.currentBookState.asReadonly();
@@ -50,12 +50,12 @@ export class BookService {
             });
     }
 
-    public loadBookById(id: number): void {
+    public loadBookById(id: string): void {
         this.loadBookByIdRequest(id).subscribe()
 
     }
 
-    private loadBookByIdRequest(id: number): Observable<Book | undefined> {
+    private loadBookByIdRequest(id: string): Observable<Book | undefined> {
         this.loadingCurrentBook.set(true);
         this.loadCurrentBookError.set(null);
 
@@ -69,7 +69,7 @@ export class BookService {
         );
     }
 
-    public resolveBookById(id: number): Observable<Book | undefined> {
+    public resolveBookById(id: string): Observable<Book | undefined> {
         return this.loadBookByIdRequest(id);
     }
 
@@ -79,9 +79,9 @@ export class BookService {
 
         switch (status) {
             case 'finished':
-                this.updateBookById(id, { status: 'wishlist' }).subscribe();
+                this.updateBookById(id, { status: 'in_wishlist' }).subscribe();
                 return;
-            case 'wishlist':
+            case 'in_wishlist':
                 this.updateBookById(id, { status: 'reading' }).subscribe();
                 return;
             case 'reading':
@@ -91,14 +91,14 @@ export class BookService {
     }
 
     public updateBookById(
-        bookId: number,
+        bookId: string,
         updates: UpdateBookDTO
     ): Observable<Book> {
         return defer(() => {
             this.updateError.set(null);
             this.addPendingId(this.updatingBookIdsState, bookId);
 
-            return this.api.updateById(bookId, updates).pipe(
+            return this.api.update(bookId, updates).pipe(
                 tap((updatedBook) => {
                     this.booksState.update((books) =>
                         books.map((book) => book.id === updatedBook.id ? updatedBook : book)
@@ -131,12 +131,12 @@ export class BookService {
         });
     }
 
-    public deleteBookById(bookId: number): Observable<void> {
+    public deleteBookById(bookId: string): Observable<void> {
         return defer(() => {
             this.deleteError.set(null);
             this.addPendingId(this.deletingBookIdsState, bookId);
 
-            return this.api.deleteById(bookId).pipe(
+            return this.api.delete(bookId).pipe(
                 tap(() => {
                     this.booksState.update((books) =>
                         books.filter((book) => book.id !== bookId)
@@ -151,13 +151,13 @@ export class BookService {
         });
     }
 
-    public getBookById(id: number): Book | undefined {
+    public getBookById(id: string): Book | undefined {
         return this.booksState().find((book) => book.id === id);
     }
 
     private addPendingId(
-        state: WritableSignal<Set<number>>,
-        id: number
+        state: WritableSignal<Set<string>>,
+        id: string
     ): void {
         state.update((ids) => {
             const nextIds = new Set(ids);
@@ -167,8 +167,8 @@ export class BookService {
     }
 
     private removePendingId(
-        state: WritableSignal<Set<number>>,
-        id: number
+        state: WritableSignal<Set<string>>,
+        id: string
     ): void {
         state.update((ids) => {
             const nextIds = new Set(ids);

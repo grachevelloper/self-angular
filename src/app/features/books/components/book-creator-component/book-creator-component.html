@@ -13,7 +13,6 @@
             <input
                 formControlName="title"
                 class="text"
-                [disabled]="isSubmitting()"
                 placeholder="Введите название..."
             />
             @if (title?.invalid && (title?.dirty || title?.touched)) {
@@ -31,7 +30,6 @@
             <input
                 formControlName="author"
                 class="text"
-                [disabled]="isSubmitting()"
                 placeholder="Введите автора..."
             />
             @if (author?.invalid && (author?.dirty || author?.touched)) {
@@ -45,20 +43,28 @@
                 </div>
             }
 
-            <select
-                formControlName="status"
-                [disabled]="isSubmitting()"
-            >
-                <option value="wishlist">В вишлисте</option>
+            <input
+                formControlName="publishedAt"
+                class="date"
+                type="date"
+                placeholder="Введите дату публикации книги."
+            />
+            @if (publishedAt?.invalid && (publishedAt?.dirty || publishedAt?.touched)) {
+                <div class="error">
+                    @if (publishedAt?.errors?.['required']) {
+                        <span>Дата публикации обязательна.</span>
+                    }
+                </div>
+            }
+
+            <select formControlName="status">
+                <option value="in_wishlist">В вишлисте</option>
                 <option value="reading">Читаю</option>
                 <option value="finished">Прочел</option>
             </select>
 
             <div>
-                <button
-                    type="submit"
-                    [disabled]="isSubmitting()"
-                >
+                <button type="submit">
                     @if (isSubmitting()) {
                         Создаем...
                     } @else {
@@ -67,7 +73,6 @@
                 </button>
                 <button
                     type="button"
-                    [disabled]="isSubmitting()"
                     (click)="onClose()"
                 >
                     Отмена

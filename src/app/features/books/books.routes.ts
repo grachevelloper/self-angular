@@ -10,8 +10,8 @@ const bookResolver: ResolveFn<Book | undefined> = (
     state: RouterStateSnapshot,
 ) => {
     const bookService = inject(BookService);
-    const bookId = Number(route.paramMap.get('id')!);
-    if (Number.isNaN(bookId)) {
+    const bookId = route.paramMap.get('id')!;
+    if (!bookId) {
         return undefined;
     }
 
