@@ -1,14 +1,6 @@
 import { Component, effect, input, output } from '@angular/core';
-import { type BookStatus } from '../../model';
+import { CreateBookDTO, type BookStatus } from '../../../../model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-
-export interface CreateBookDTO {
-    title: string;
-    author: string;
-    status: BookStatus;
-    publishedAt: Date;
-}
-export interface UpdateBookDTO extends Partial<CreateBookDTO> { }
 
 const VOID_STATE: CreateBookDTO = {
     title: '',
@@ -62,7 +54,7 @@ export class BookCreatorComponent {
     get title() { return this.bookForm.get('title'); }
     get author() { return this.bookForm.get('author'); }
     get status() { return this.bookForm.get('status'); }
-    get publishedAt() { return this.bookForm.get('status'); }
+    get publishedAt() { return this.bookForm.get('publishedAt'); }
 
     public onSubmit(): void {
         const form = this.bookForm;
@@ -86,5 +78,4 @@ export class BookCreatorComponent {
         this.close.emit();
         this.bookForm.setValue(VOID_STATE);
     }
-
 }

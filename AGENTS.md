@@ -12,3 +12,7 @@
 - `src/app/app.routes.ts` lazy-loads `src/app/features/books/books.routes.ts` for the root path.
 - `src/app/app.routes.server.ts` contains only SSR `ServerRoute[]` render-mode config and must not be passed to `provideRouter`.
 - After moving page markup out of `App`, the root `App` should stay as a shell with `RouterOutlet` imported and `<router-outlet />` in `src/app/app.html`.
+
+## If task handling with ng-zorro-antd
+
+Read https://ng.ant.design/llms-full.txt

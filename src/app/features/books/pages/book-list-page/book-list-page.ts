@@ -1,11 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { BookCardComponent } from '../../components/book-card-component/book-card-component';
-import { BookCreatorComponent, CreateBookDTO } from '../../components/book-creator-component/book-creator-component';
-import { BookFiltersComponent } from '../../components/book-filters-component/book-filters-component';
-import { BookStatus, Book, BookFilter } from '../../model';
+import { BookStatus, Book, BookFilter, CreateBookDTO } from '../../model';
 import { BookService } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { BookCardComponent } from './components/book-card-component/book-card-component';
+import { BookCreatorComponent } from './components/book-creator-component/book-creator-component';
+import { BookFiltersComponent } from './components/book-filters-component/book-filters-component';
 
 @Component({
     selector: 'app-book-list-page',

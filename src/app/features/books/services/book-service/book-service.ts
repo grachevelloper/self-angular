@@ -1,7 +1,6 @@
 import { computed, inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { catchError, defer, EMPTY, finalize, Observable, of, tap } from 'rxjs';
-import { CreateBookDTO, UpdateBookDTO } from '../../components/book-creator-component/book-creator-component';
-import { Book } from '../../model';
+import { Book, CreateBookDTO, UpdateBookDTO } from '../../model';
 import { BookApiService } from '../book-api-service/book-api-service';
 
 @Injectable({
@@ -102,6 +101,9 @@ export class BookService {
                 tap((updatedBook) => {
                     this.booksState.update((books) =>
                         books.map((book) => book.id === updatedBook.id ? updatedBook : book)
+                    );
+                    this.currentBookState.update((book) =>
+                        book?.id === updatedBook.id ? updatedBook : book
                     );
                 }),
                 catchError(() => {

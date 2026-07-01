@@ -14,5 +14,31 @@
         <h5>{{ book()?.author }}</h5>
 
         <p>{{ book()?.status }}</p>
+        <p>{{ book()?.publishedAt }}</p>
+    }
+    <button
+        nz-button
+        nzType="primary"
+        nzSize="default"
+        [disabled]="isUpdatingBook()"
+        (click)="openBookRedactor()"
+    >
+        <nz-icon nzType="edit" />
+        Редактировать
+    </button>
+    @if (updateError()) {
+        <p class="error">{{ updateError() }}</p>
     }
 </main>
+@if (book(); as bookValue) {
+    <book-redactor-component
+        [titleIn]="bookValue.title"
+        [statusIn]="bookValue.status"
+        [publishedAtIn]="bookValue.publishedAt"
+        [authorIn]="bookValue.author"
+        [isOpen]="isBookRedactorOpen()"
+        [isSubmitting]="isUpdatingBook()"
+        (close)="closeBookRedactor()"
+        (submitUpdate)="updateBook($event)"
+    />
+}

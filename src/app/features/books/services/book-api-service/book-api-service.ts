@@ -3,9 +3,9 @@ import {
     Injectable
 } from '@angular/core';
 import { BASE_URL } from '../../../../shared/constants';
-import { Book } from '../../model';
+import { Book, CreateBookDTO, UpdateBookDTO } from '../../model';
 import { HttpClient } from '@angular/common/http';
-import { CreateBookDTO, UpdateBookDTO } from '../../components/book-creator-component/book-creator-component';
+
 import { Observable } from 'rxjs';
 
 

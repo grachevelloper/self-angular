@@ -1,3 +1,5 @@
+export * from './dto'
+
 export type BookStatus = 'reading' | 'finished' | 'in_wishlist';
 
 export interface Book {
@@ -11,3 +13,5 @@ export interface Book {
 }
 
 export type BookFilter = BookStatus | 'all';
+
+
