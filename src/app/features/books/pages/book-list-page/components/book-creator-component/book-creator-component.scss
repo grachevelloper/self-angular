@@ -1,55 +1,8 @@
-.portal {
-    display: none;
-    width: 0;
-    height: 0;
-}
-
-.portal_isOpen {
-    display: block;
-    position: fixed;
-    inset: 0;
-    overflow: none;
-    height: 100%;
-    width: 100%;
-    min-height: 100dvh;
-    min-width: 100dvw;
-}
-
 .form {
     display: flex;
     flex-direction: column;
     gap: 4px;
     justify-content: center;
-}
-
-.modal {
-    display: none;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
-    position: fixed;
-    min-height: 600px;
-    min-width: 600px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    background-color: white;
-    padding: 50px;
-    border-radius: 10%;
-}
-.modal_isOpen {
-    display: flex;
-}
-
-.overlay {
-    position: fixed;
-    height: inherit;
-    width: inherit;
-
-    background-color: rgba(0, 0, 0, 0.3);
-    z-index: 999;
 }
 
 span {

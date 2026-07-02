@@ -1,88 +1,89 @@
-<div [class.portal_isOpen]="isOpen() === true">
-    <div
-        class="modal"
-        [class.modal_isOpen]="isOpen() === true"
+<nz-modal
+    [nzVisible]="isOpen()"
+    nzTitle="Создаем книгу"
+    [nzFooter]="null"
+    [nzMaskClosable]="!isSubmitting()"
+    [nzClosable]="!isSubmitting()"
+    (nzOnCancel)="onClose()"
+>
+    <form
+        *nzModalContent
+        class="form"
+        [formGroup]="bookForm"
+        (ngSubmit)="onSubmit()"
     >
-        <h2>Создаем книгу</h2>
-        <form
-            class="form"
-            [formGroup]="bookForm"
-            (ngSubmit)="onSubmit()"
-        >
-            <h4>Название</h4>
-            <input
-                formControlName="title"
-                class="text"
-                placeholder="Введите название..."
-            />
-            @if (title?.invalid && (title?.dirty || title?.touched)) {
-                <div class="error">
-                    @if (title?.errors?.['required']) {
-                        <span>Название обязательно.</span>
-                    }
-                    @if (title?.errors?.['minlength']) {
-                        <span>Минимум 3 символа.</span>
-                    }
-                </div>
-            }
-
-            <h4>Автор</h4>
-            <input
-                formControlName="author"
-                class="text"
-                placeholder="Введите автора..."
-            />
-            @if (author?.invalid && (author?.dirty || author?.touched)) {
-                <div class="error">
-                    @if (author?.errors?.['required']) {
-                        <span>Автор обязателен.</span>
-                    }
-                    @if (author?.errors?.['minlength']) {
-                        <span>Минимум 3 символа.</span>
-                    }
-                </div>
-            }
-
-            <input
-                formControlName="publishedAt"
-                class="date"
-                type="date"
-                placeholder="Введите дату публикации книги."
-            />
-            @if (publishedAt?.invalid && (publishedAt?.dirty || publishedAt?.touched)) {
-                <div class="error">
-                    @if (publishedAt?.errors?.['required']) {
-                        <span>Дата публикации обязательна.</span>
-                    }
-                </div>
-            }
-
-            <select formControlName="status">
-                <option value="in_wishlist">В вишлисте</option>
-                <option value="reading">Читаю</option>
-                <option value="finished">Прочел</option>
-            </select>
-
-            <div>
-                <button type="submit">
-                    @if (isSubmitting()) {
-                        Создаем...
-                    } @else {
-                        Создать книгу
-                    }
-                </button>
-                <button
-                    type="button"
-                    (click)="onClose()"
-                >
-                    Отмена
-                </button>
+        <h4>Название</h4>
+        <input
+            formControlName="title"
+            class="text"
+            placeholder="Введите название..."
+        />
+        @if (title?.invalid && (title?.dirty || title?.touched)) {
+            <div class="error">
+                @if (title?.errors?.['required']) {
+                    <span>Название обязательно.</span>
+                }
+                @if (title?.errors?.['minlength']) {
+                    <span>Минимум 3 символа.</span>
+                }
             </div>
-        </form>
-    </div>
+        }
 
-    <div
-        class="overlay"
-        (click)="onClose()"
-    ></div>
-</div>
+        <h4>Автор</h4>
+        <input
+            formControlName="author"
+            class="text"
+            placeholder="Введите автора..."
+        />
+        @if (author?.invalid && (author?.dirty || author?.touched)) {
+            <div class="error">
+                @if (author?.errors?.['required']) {
+                    <span>Автор обязателен.</span>
+                }
+                @if (author?.errors?.['minlength']) {
+                    <span>Минимум 3 символа.</span>
+                }
+            </div>
+        }
+
+        <input
+            formControlName="publishedAt"
+            class="date"
+            type="date"
+            placeholder="Введите дату публикации книги."
+        />
+        @if (publishedAt?.invalid && (publishedAt?.dirty || publishedAt?.touched)) {
+            <div class="error">
+                @if (publishedAt?.errors?.['required']) {
+                    <span>Дата публикации обязательна.</span>
+                }
+            </div>
+        }
+
+        <select formControlName="status">
+            <option value="in_wishlist">В вишлисте</option>
+            <option value="reading">Читаю</option>
+            <option value="finished">Прочел</option>
+        </select>
+
+        <div>
+            <button
+                type="submit"
+                [disabled]="isSubmitting()"
+            >
+                @if (isSubmitting()) {
+                    Создаем...
+                } @else {
+                    Создать книгу
+                }
+            </button>
+            <button
+                type="button"
+                [disabled]="isSubmitting()"
+                (click)="onClose()"
+            >
+                Отмена
+            </button>
+        </div>
+    </form>
+</nz-modal>

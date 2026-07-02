@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { BookStatus, Book, BookFilter, CreateBookDTO } from '../../model';
 import { BookService } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { BookFiltersComponent } from './components/book-filters-component/book-f
     imports: [BookCardComponent, BookFiltersComponent, BookCreatorComponent],
     templateUrl: './book-list-page.html',
     styleUrl: './book-list-page.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookListPage {
     private router = inject(Router);
@@ -74,16 +75,18 @@ export class BookListPage {
 
     protected readonly isCreateBookModalOpen = signal<boolean>(false);
 
-    protected onChangeBookModal(): void {
-        this.isCreateBookModalOpen.update((current) => !current)
-        return;
+    protected openCreateBookModal(): void {
+        this.isCreateBookModalOpen.set(true);
+    }
+
+    protected closeCreateBookModal(): void {
+        this.isCreateBookModalOpen.set(false);
     }
 
     protected onSubmitBookModal(newBook: CreateBookDTO): void {
         this.booksService.addBook(newBook).subscribe({
-            next: () => this.onChangeBookModal(),
+            next: () => this.closeCreateBookModal(),
         });
-        return;
     }
 
     protected deleteBook(book: Book): void {

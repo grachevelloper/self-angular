@@ -1,12 +1,22 @@
-import { Component, effect, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, output } from '@angular/core';
 import { CreateBookDTO, type BookStatus } from '../../../../model';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
-const VOID_STATE: CreateBookDTO = {
-    title: '',
-    author: '',
-    status: 'in_wishlist',
-    publishedAt: new Date(Date.now()),
+interface BookCreatorFormValue {
+    title: string;
+    author: string;
+    status: BookStatus;
+    publishedAt: string;
+}
+
+function createEmptyFormValue(): BookCreatorFormValue {
+    return {
+        title: '',
+        author: '',
+        status: 'in_wishlist',
+        publishedAt: new Date().toISOString().slice(0, 10),
+    };
 }
 
 
@@ -14,7 +24,8 @@ const VOID_STATE: CreateBookDTO = {
     selector: 'app-book-creator-component',
     templateUrl: './book-creator-component.html',
     styleUrl: './book-creator-component.scss',
-    imports: [ReactiveFormsModule],
+    imports: [NzModalModule, ReactiveFormsModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookCreatorComponent {
     public readonly isOpen = input.required<boolean>();
@@ -22,23 +33,31 @@ export class BookCreatorComponent {
     public readonly close = output<void>();
     public readonly submitBook = output<CreateBookDTO>();
 
-    protected bookForm = new FormGroup({
-        title: new FormControl({ value: '', disabled: false }, [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(300)
-        ]),
-        author: new FormControl({ value: '', disabled: false }, [
-            Validators.required,
-            Validators.minLength(3),
-            Validators.maxLength(150)
-        ]),
-        status: new FormControl<BookStatus>({ value: 'in_wishlist', disabled: false }, [
-            Validators.required,
-        ]),
-        publishedAt: new FormControl<Date>({ value: new Date(), disabled: false }, [
-            Validators.required,
-        ])
+    protected readonly bookForm = new FormGroup({
+        title: new FormControl('', {
+            nonNullable: true,
+            validators: [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(300)
+            ]
+        }),
+        author: new FormControl('', {
+            nonNullable: true,
+            validators: [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(150)
+            ]
+        }),
+        status: new FormControl<BookStatus>('in_wishlist', {
+            nonNullable: true,
+            validators: [Validators.required],
+        }),
+        publishedAt: new FormControl(createEmptyFormValue().publishedAt, {
+            nonNullable: true,
+            validators: [Validators.required],
+        })
     })
 
 
@@ -50,6 +69,11 @@ export class BookCreatorComponent {
         }
     });
 
+    private readonly resetFormOnClose = effect(() => {
+        if (!this.isOpen() && !this.isSubmitting()) {
+            this.resetForm();
+        }
+    });
 
     get title() { return this.bookForm.get('title'); }
     get author() { return this.bookForm.get('author'); }
@@ -63,8 +87,11 @@ export class BookCreatorComponent {
         }
 
         if (form.valid) {
-            const formData = form.getRawValue() as CreateBookDTO;
-            this.submitBook.emit(formData)
+            const formData = form.getRawValue();
+            this.submitBook.emit({
+                ...formData,
+                publishedAt: new Date(formData.publishedAt),
+            })
         } else {
             this.bookForm.markAllAsTouched();
         }
@@ -76,6 +103,10 @@ export class BookCreatorComponent {
         }
 
         this.close.emit();
-        this.bookForm.setValue(VOID_STATE);
+        this.resetForm();
+    }
+
+    private resetForm(): void {
+        this.bookForm.reset(createEmptyFormValue());
     }
 }

@@ -33,14 +33,14 @@
     <button
         class="book-create-button"
         [disabled]="booksService.creatingBook()"
-        (click)="onChangeBookModal()"
+        (click)="openCreateBookModal()"
     >
         Создать запись
     </button>
     <app-book-creator-component
         [isOpen]="isCreateBookModalOpen()"
         [isSubmitting]="booksService.creatingBook()"
-        (close)="onChangeBookModal()"
+        (close)="closeCreateBookModal()"
         (submitBook)="onSubmitBookModal($event)"
     />
 </main>
