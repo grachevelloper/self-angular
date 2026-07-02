@@ -1,40 +1,34 @@
-import {
-    inject,
-    Injectable
-} from '@angular/core';
-import { BASE_URL } from '../../../../shared/constants';
+import { inject, Injectable } from '@angular/core';
+import { API_BASE_URL } from '../../../../shared/providers';
 import { Book, CreateBookDTO, UpdateBookDTO } from '../../model';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-
 
 @Injectable({
     providedIn: 'root',
 })
 export class BookApiService {
     private readonly http = inject(HttpClient);
-    private readonly baseUrl = BASE_URL + '/books';
-
+    private readonly apiUrl = `${inject(API_BASE_URL)}/books`;
 
     getAll(): Observable<Book[]> {
-        return this.http.get<Book[]>(this.baseUrl);
+        return this.http.get<Book[]>(this.apiUrl);
     }
 
-    getById(id: string): Observable<Book | undefined> {
-        return this.http.get<Book>(`${this.baseUrl}/${id}`);
+    getById(id: string): Observable<Book> {
+        return this.http.get<Book>(`${this.apiUrl}/${id}`);
     }
 
     add(book: CreateBookDTO): Observable<Book> {
-
-        return this.http.post<Book>(this.baseUrl, book);
+        return this.http.post<Book>(this.apiUrl, book);
     }
 
     delete(id: string): Observable<void> {
-        return this.http.delete<void>(`${this.baseUrl}/${id}`);
+        return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
 
     update(id: string, book: UpdateBookDTO): Observable<Book> {
-        return this.http.post<Book>(`${this.baseUrl}/${id}`, book);
+        return this.http.post<Book>(`${this.apiUrl}/${id}`, book);
     }
 }
