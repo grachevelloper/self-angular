@@ -1,41 +1,33 @@
-.row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 1rem;
-}
-
 .empty {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .error {
-  width: 100%;
-  color: crimson;
-  text-align: center;
+    width: 100%;
+    color: crimson;
+    text-align: center;
 }
 
-.book-create-button{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  bottom: 10%;
-  right: 5%;
-  width: 100px;
-  aspect-ratio: 1/1;
-  border-radius: 100%;
-  background-color: rgb(235, 179, 255);
-  color: #fff;
-  border: 0;
-  border: none;
+.book-create-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    width: 100px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    background-color: rgb(235, 179, 255);
+    color: #fff;
+    border: 0;
+    border: none;
 }
 
 .book-create-button:disabled {
-  cursor: wait;
-  opacity: 0.7;
+    cursor: wait;
+    opacity: 0.7;
 }

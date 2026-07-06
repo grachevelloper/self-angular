@@ -1,0 +1,22 @@
+<div class="row">
+    @let books = filteredBooks();
+
+    @if (isLoading()) {
+        <p>Loading...</p>
+    } @else if (loadError()) {
+        <p class="error">{{ loadError() }}</p>
+    } @else if (books.length === 0) {
+        <p class="empty">Книги не найдены</p>
+    } @else {
+        @for (book of books; track book.id) {
+            <app-book-card
+                [book]="book"
+                [isUpdating]="updatingBookIds().has(book.id)"
+                [isDeleting]="deletingBookIds().has(book.id)"
+                (clicked)="clicked.emit(book.id)"
+                (statusClicked)="statusClicked.emit($event)"
+                (deleteClicked)="deleteClicked.emit($event)"
+            />
+        }
+    }
+</div>

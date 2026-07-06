@@ -1,35 +1,30 @@
 <main class="main">
-    <app-book-filters
+    <book-filters
         [selectedStatus]="selectedStatus()"
         [searchQuery]="searchQuery()"
+        [sorted]="sortOrder()"
         (statusSelected)="handleChangeStatus($event)"
         (searchChanged)="handleChangeSearch($event)"
+        (sortedChanged)="handleChangeSortOrder($event)"
     />
     @if (booksService.actionError()) {
         <p class="error">{{ booksService.actionError() }}</p>
     }
-    <div class="row">
-        @let books = filteredBooks();
 
-        @if (booksService.loadingBooks()) {
-            <p>Loading...</p>
-        } @else if (booksService.loadBooksError()) {
-            <p class="error">{{ booksService.loadBooksError() }}</p>
-        } @else if (books.length === 0) {
-            <p class="empty">Книги не найдены</p>
-        } @else {
-            @for (book of books; track book.id) {
-                <app-book-card
-                    [book]="book"
-                    [isUpdating]="booksService.updatingBookIds().has(book.id)"
-                    [isDeleting]="booksService.deletingBookIds().has(book.id)"
-                    (clicked)="handleBookClick(book.id)"
-                    (statusClicked)="changeBookStatus($event)"
-                    (deleteClicked)="deleteBook($event)"
-                />
-            }
-        }
-    </div>
+    <book-list
+        [books]="booksService.books()"
+        [selectedStatus]="selectedStatus()"
+        [searchQuery]="searchQuery()"
+        [sortOrder]="sortOrder()"
+        [isLoading]="booksService.loadingBooks()"
+        [loadError]="booksService.loadBooksError()"
+        [updatingBookIds]="booksService.updatingBookIds()"
+        [deletingBookIds]="booksService.deletingBookIds()"
+        (clicked)="handleBookClick($event)"
+        (statusClicked)="changeBookStatus($event)"
+        (deleteClicked)="deleteBook($event)"
+    />
+
     <button
         class="book-create-button"
         [disabled]="booksService.creatingBook()"

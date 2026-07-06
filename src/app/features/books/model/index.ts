@@ -12,6 +12,6 @@ export interface Book {
     updatedAt?: Date
 }
 
-export type BookFilter = BookStatus | 'all';
+export type BookFiltered = BookStatus | 'all';
 
 

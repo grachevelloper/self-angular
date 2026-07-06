@@ -5,24 +5,46 @@
         [formControl]="searchControl"
     />
     <button
+        nz-button
         (click)="onStatusSelected('in_wishlist')"
-        class="nav-button"
-        [class.nav-button_selected]="selectedStatus() === 'in_wishlist'"
+        [nzType]="selectedStatus() === 'in_wishlist' ? 'primary' : 'default'"
     >
         Вишлист
     </button>
     <button
+        nz-button
         (click)="onStatusSelected('reading')"
-        class="nav-button"
-        [class.nav-button_selected]="selectedStatus() === 'reading'"
+        [nzType]="selectedStatus() === 'reading' ? 'primary' : 'default'"
     >
         Читаю
     </button>
     <button
+        nz-button
         (click)="onStatusSelected('finished')"
-        class="nav-button"
-        [class.nav-button_selected]="selectedStatus() === 'finished'"
+        [nzType]="selectedStatus() === 'finished' ? 'primary' : 'default'"
     >
         Прочитал
     </button>
+
+    <nz-select
+        [ngModel]="sorted()"
+        (ngModelChange)="onSortOrderSelected($event)"
+    >
+        <nz-option
+            [nzValue]="Sorted.CreatedDesc"
+            nzLabel="По убыванию времени создания"
+        />
+        <nz-option
+            [nzValue]="Sorted.CreatedAsc"
+            nzLabel="По возрастанию времени создания"
+        />
+        <nz-option
+            [nzValue]="Sorted.TitleAsc"
+            nzLabel="По возрастанию алфавита"
+        />
+        <nz-option
+            [nzValue]="Sorted.TitleDesc"
+            nzLabel="По убыванию алфавита"
+        />
+    </nz-select>
 </nav>
