@@ -20,10 +20,10 @@ export class BookDetailsPage {
         effect(() => {
             const book = this.book();
             if (book) {
-                this.titleService.setTitle(`${book.title} | Мои книги`);
+                this.titleService.setTitle($localize`${book.title}:bookTitle: | Мои книги`);
                 return;
             }
-            this.titleService.setTitle('Книга не найдена | Мои книги');
+            this.titleService.setTitle($localize`Книга не найдена | Мои книги`);
         });
     }
 

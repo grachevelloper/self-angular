@@ -1,6 +1,7 @@
 <nz-modal
     [nzVisible]="isOpen()"
     nzTitle="Создаем книгу"
+    i18n-nzTitle
     [nzFooter]="null"
     [nzMaskClosable]="!isSubmitting()"
     [nzClosable]="!isSubmitting()"
@@ -12,36 +13,38 @@
         [formGroup]="bookForm"
         (ngSubmit)="onSubmit()"
     >
-        <h4>Название</h4>
+        <h4 i18n>Название</h4>
         <input
             formControlName="title"
             class="text"
             placeholder="Введите название..."
+            i18n-placeholder
         />
         @if (title?.invalid && (title?.dirty || title?.touched)) {
             <div class="error">
                 @if (title?.errors?.['required']) {
-                    <span>Название обязательно.</span>
+                    <span i18n>Название обязательно.</span>
                 }
                 @if (title?.errors?.['minlength']) {
-                    <span>Минимум 3 символа.</span>
+                    <span i18n>Минимум 3 символа.</span>
                 }
             </div>
         }
 
-        <h4>Автор</h4>
+        <h4 i18n>Автор</h4>
         <input
             formControlName="author"
             class="text"
             placeholder="Введите автора..."
+            i18n-placeholder
         />
         @if (author?.invalid && (author?.dirty || author?.touched)) {
             <div class="error">
                 @if (author?.errors?.['required']) {
-                    <span>Автор обязателен.</span>
+                    <span i18n>Автор обязателен.</span>
                 }
                 @if (author?.errors?.['minlength']) {
-                    <span>Минимум 3 символа.</span>
+                    <span i18n>Минимум 3 символа.</span>
                 }
             </div>
         }
@@ -51,19 +54,35 @@
             class="date"
             type="date"
             placeholder="Введите дату публикации книги."
+            i18n-placeholder
         />
         @if (publishedAt?.invalid && (publishedAt?.dirty || publishedAt?.touched)) {
             <div class="error">
                 @if (publishedAt?.errors?.['required']) {
-                    <span>Дата публикации обязательна.</span>
+                    <span i18n>Дата публикации обязательна.</span>
                 }
             </div>
         }
 
         <select formControlName="status">
-            <option value="in_wishlist">В вишлисте</option>
-            <option value="reading">Читаю</option>
-            <option value="finished">Прочел</option>
+            <option
+                value="in_wishlist"
+                i18n
+            >
+                В вишлисте
+            </option>
+            <option
+                value="reading"
+                i18n
+            >
+                Читаю
+            </option>
+            <option
+                value="finished"
+                i18n
+            >
+                Прочел
+            </option>
         </select>
 
         <div>
@@ -72,15 +91,16 @@
                 [disabled]="isSubmitting()"
             >
                 @if (isSubmitting()) {
-                    Создаем...
+                    <span i18n>Создаем...</span>
                 } @else {
-                    Создать книгу
+                    <span i18n>Создать книгу</span>
                 }
             </button>
             <button
                 type="button"
                 [disabled]="isSubmitting()"
                 (click)="onClose()"
+                i18n
             >
                 Отмена
             </button>

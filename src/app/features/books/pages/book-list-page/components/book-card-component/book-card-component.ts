@@ -24,11 +24,11 @@ export class BookCardComponent {
     protected statusLabel(status: BookStatus): string {
         switch (status) {
             case 'reading':
-                return 'Читаю';
+                return $localize`Читаю`;
             case 'finished':
-                return 'Прочитано';
+                return $localize`Прочитано`;
             case 'in_wishlist':
-                return 'В планах';
+                return $localize`В планах`;
         }
     }
 

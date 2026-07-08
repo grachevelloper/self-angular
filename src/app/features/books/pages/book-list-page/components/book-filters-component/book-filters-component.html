@@ -2,12 +2,14 @@
     <input
         type="search"
         placeholder="Search books"
+        i18n-placeholder
         [formControl]="searchControl"
     />
     <button
         nz-button
         (click)="onStatusSelected('in_wishlist')"
         [nzType]="selectedStatus() === 'in_wishlist' ? 'primary' : 'default'"
+        i18n
     >
         Вишлист
     </button>
@@ -15,6 +17,7 @@
         nz-button
         (click)="onStatusSelected('reading')"
         [nzType]="selectedStatus() === 'reading' ? 'primary' : 'default'"
+        i18n
     >
         Читаю
     </button>
@@ -22,6 +25,7 @@
         nz-button
         (click)="onStatusSelected('finished')"
         [nzType]="selectedStatus() === 'finished' ? 'primary' : 'default'"
+        i18n
     >
         Прочитал
     </button>
@@ -32,10 +36,12 @@
         <nz-option
             [nzValue]="BookSortField.CreatedAt"
             nzLabel="Дата создания"
+            i18n-nzLabel
         />
         <nz-option
             [nzValue]="BookSortField.Title"
             nzLabel="Название"
+            i18n-nzLabel
         />
     </nz-select>
     <nz-select
@@ -45,10 +51,12 @@
         <nz-option
             [nzValue]="SortOrder.Desc"
             nzLabel="По убыванию"
+            i18n-nzLabel
         />
         <nz-option
             [nzValue]="SortOrder.Asc"
             nzLabel="По возрастанию"
+            i18n-nzLabel
         />
     </nz-select>
 </nav>

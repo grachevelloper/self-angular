@@ -5,6 +5,7 @@ import {
     effect,
     inject,
     signal,
+    untracked,
 } from '@angular/core';
 import { BookStatus, Book, BookFiltered, BookSortField, CreateBookDTO } from '../../model';
 import { BookService } from '../../services';
@@ -49,13 +50,15 @@ export class BookListPage {
 
     constructor() {
         effect(() => {
-            this.booksService.loadBooks({
+            const query = {
                 page: this.page(),
                 limit: this.limit(),
-                sortField: this.sortField(),
                 order: this.sortOrder(),
-            })
-        });
+                sortField: this.sortField()
+            };
+
+            untracked(() => this.booksService.loadBooks(query));
+        })
     }
 
     protected changeBookStatus(book: Book): void {

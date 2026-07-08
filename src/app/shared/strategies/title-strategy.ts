@@ -12,9 +12,9 @@ export class AppTitleStrategy extends TitleStrategy {
         const routeTitle = this.buildTitle(routerState);
 
         if (routeTitle) {
-            this.title.setTitle(`${routeTitle} | Мои книги`);
+            this.title.setTitle($localize`${routeTitle}:routeTitle: | Мои книги`);
         } else {
-            this.title.setTitle('Мои книги');
+            this.title.setTitle($localize`Мои книги`);
         }
 
     }

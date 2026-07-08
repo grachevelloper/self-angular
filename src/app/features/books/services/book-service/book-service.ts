@@ -58,7 +58,7 @@ export class BookService {
             this.booksState.update((prev) => ({
                 ...prev,
                 limit,
-                books: this.booksState().books.slice(limit),
+                books: this.booksState().books.slice(0, limit),
             }))
             this.loadingBooks.set(false)
         } else {
@@ -74,7 +74,7 @@ export class BookService {
                             limit: res.limit,
                             hasNext: res.has_next,
                         }),
-                    error: () => this.loadBooksError.set('Не удалось загрузить книги'),
+                    error: () => this.loadBooksError.set($localize`Не удалось загрузить книги`),
                 });
         }
     }
@@ -90,7 +90,7 @@ export class BookService {
         return this.api.getById(id).pipe(
             tap((book) => this.currentBookState.set(book)),
             catchError(() => {
-                this.loadCurrentBookError.set('Не удалось загрузить книгу');
+                this.loadCurrentBookError.set($localize`Не удалось загрузить книгу`);
                 return of(undefined);
             }),
             finalize(() => this.loadingCurrentBook.set(false)),
@@ -135,7 +135,7 @@ export class BookService {
                     );
                 }),
                 catchError(() => {
-                    this.updateError.set('Не удалось обновить книгу');
+                    this.updateError.set($localize`Не удалось обновить книгу`);
                     return EMPTY;
                 }),
                 finalize(() => this.removePendingId(this.updatingBookIdsState, bookId)),
@@ -157,7 +157,7 @@ export class BookService {
                     }));
                 }),
                 catchError(() => {
-                    this.createError.set('Не удалось создать книгу');
+                    this.createError.set($localize`Не удалось создать книгу`);
                     return EMPTY;
                 }),
                 finalize(() => this.creatingBook.set(false)),
@@ -179,7 +179,7 @@ export class BookService {
                     }));
                 }),
                 catchError(() => {
-                    this.deleteError.set('Не удалось удалить книгу');
+                    this.deleteError.set($localize`Не удалось удалить книгу`);
                     return EMPTY;
                 }),
                 finalize(() => this.removePendingId(this.deletingBookIdsState, bookId)),

@@ -29,12 +29,9 @@
             nzSize="small"
             [disabled]="isUpdating() || isDeleting()"
             (click)="$event.stopPropagation(); statusClicked.emit(book())"
+            i18n
         >
-            @if (isUpdating()) {
-                Обновляем...
-            } @else {
-                Сменить статус
-            }
+            Сменить статус
         </button>
         <button
             nz-button
@@ -44,9 +41,9 @@
             (click)="$event.stopPropagation(); deleteClicked.emit(book())"
         >
             @if (isDeleting()) {
-                Удаляем...
+                <span i18n>Удаляем...</span>
             } @else {
-                Удалить
+                <span i18n>Удалить</span>
             }
         </button>
     </div>

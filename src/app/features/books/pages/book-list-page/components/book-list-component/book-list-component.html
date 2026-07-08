@@ -21,6 +21,7 @@
                 class="state"
                 nzType="error"
                 nzMessage="Не удалось загрузить книги"
+                i18n-nzMessage
                 [nzDescription]="loadError()"
                 nzShowIcon
             />
@@ -28,6 +29,7 @@
             <nz-empty
                 class="state"
                 nzNotFoundContent="Книги не найдены"
+                i18n-nzNotFoundContent
             />
         } @else {
             @for (book of books; track book.id) {

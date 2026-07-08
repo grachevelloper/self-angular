@@ -23,7 +23,7 @@ export const BOOKS_ROUTES: Routes = [
     {
         path: '',
         component: BookListPage,
-        title: "Мои книги"
+        title: $localize`Мои книги`
     },
     {
         path: ':id',
@@ -33,5 +33,4 @@ export const BOOKS_ROUTES: Routes = [
         }
     }
 ]
-
 

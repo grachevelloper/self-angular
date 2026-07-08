@@ -1,13 +1,18 @@
 <main>
-    <button (click)="handleBackClick()">Назад</button>
+    <button
+        (click)="handleBackClick()"
+        i18n
+    >
+        Назад
+    </button>
 
     @if (isLoading()) {
-        <h3>Загрузка...</h3>
+        <h3 i18n>Загрузка...</h3>
     } @else if (error()) {
-        <h3>Ошибка!</h3>
+        <h3 i18n>Ошибка!</h3>
         <p>{{ error() }}</p>
     } @else if (!book()) {
-        <h3>Книга не найдена!</h3>
+        <h3 i18n>Книга не найдена!</h3>
     } @else {
         <h3>{{ book()?.title }}</h3>
 
@@ -22,6 +27,7 @@
         nzSize="default"
         [disabled]="isUpdatingBook()"
         (click)="openBookRedactor()"
+        i18n
     >
         <nz-icon nzType="edit" />
         Редактировать

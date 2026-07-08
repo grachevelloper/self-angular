@@ -7,6 +7,14 @@
     "newProjectRoot": "projects",
     "projects": {
         "angular": {
+            "i18n": {
+                "sourceLocale": "ru",
+                "locales": {
+                    "en-US": {
+                        "translation": "src/locale/messages.en-US.xlf"
+                    }
+                }
+            },
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -22,7 +30,9 @@
                     "options": {
                         "browser": "src/main.ts",
                         "tsConfig": "tsconfig.app.json",
+                        "polyfills": ["@angular/localize/init"],
                         "inlineStyleLanguage": "scss",
+                        "localize": ["en-US"],
                         "assets": [
                             {
                                 "glob": "**/*",
@@ -64,6 +74,7 @@
                             "optimization": false,
                             "extractLicenses": false,
                             "sourceMap": true,
+                            "localize": ["en-US"],
                             "ssr": false,
                             "prerender": false,
                             "outputMode": "static"

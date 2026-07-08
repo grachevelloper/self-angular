@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="ru-RU" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5013936500160220538" datatype="html">
+        <source>Мои книги</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/books.routes.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/strategies/title-strategy.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9026785351754933741" datatype="html">
+        <source> Назад </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.html</context>
+          <context context-type="linenumber">6,7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9204431604673019058" datatype="html">
+        <source>Загрузка...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.html</context>
+          <context context-type="linenumber">10,11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6723318809038949279" datatype="html">
+        <source>Ошибка!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.html</context>
+          <context context-type="linenumber">12,13</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6318834222589390571" datatype="html">
+        <source>Книга не найдена!</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.html</context>
+          <context context-type="linenumber">15,16</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6840159657981643532" datatype="html">
+        <source><x id="START_TAG_NZ_ICON" ctype="x-nz_icon" equiv-text="&lt;nz-icon nzType=&quot;edit&quot; /&gt;"/><x id="CLOSE_TAG_NZ_ICON" ctype="x-nz_icon" equiv-text="&lt;nz-icon nzType=&quot;edit&quot; /&gt;"/> Редактировать </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4317346000721197119" datatype="html">
+        <source><x id="bookTitle" equiv-text="book.title"/> | Мои книги</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4183371478397596311" datatype="html">
+        <source>Книга не найдена | Мои книги</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/book-details-page.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2764669229440225662" datatype="html">
+        <source>Изменим книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1999819659160476251" datatype="html">
+        <source>Название</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">43,44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3035416487857938691" datatype="html">
+        <source>Введите название...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8371006424893224922" datatype="html">
+        <source>Название обязательно.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5927506884909454556" datatype="html">
+        <source>Минимум 3 символа.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4374398420619375160" datatype="html">
+        <source>Автор</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3021008095881625402" datatype="html">
+        <source>Введите автора...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7441723215882535716" datatype="html">
+        <source>Автор обязателен.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7913195592077752832" datatype="html">
+        <source>Введите дату публикации книги.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3352815721749297089" datatype="html">
+        <source>Дата публикации обязательна.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">62,63</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2348904629281878084" datatype="html">
+        <source> В вишлисте </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8230008402000506356" datatype="html">
+        <source> Читаю </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">78</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">22,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1339470964574702268" datatype="html">
+        <source> Прочел </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">84</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6961118861929627556" datatype="html">
+        <source>Сохраняем...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3723747900508174057" datatype="html">
+        <source>Сохранить</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">96,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8496706982698142865" datatype="html">
+        <source> Отмена </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-details-page/components/book-redactor-component/book-redactor-component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1664421360015747896" datatype="html">
+        <source> Создать запись </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/book-list-page.html</context>
+          <context context-type="linenumber">42,43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6701077408405433805" datatype="html">
+        <source> Сменить статус </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.html</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4916077101492395777" datatype="html">
+        <source>Удаляем...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.html</context>
+          <context context-type="linenumber">44,45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4561887409678109920" datatype="html">
+        <source>Удалить</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1438313538773786069" datatype="html">
+        <source>Читаю</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1393452123942156603" datatype="html">
+        <source>Прочитано</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.ts</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3347544092577004247" datatype="html">
+        <source>В планах</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-card-component/book-card-component.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1294789038393261381" datatype="html">
+        <source>Создаем книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">3,4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7912403013108966017" datatype="html">
+        <source>Создаем...</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1316610156687576110" datatype="html">
+        <source>Создать книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-creator-component/book-creator-component.html</context>
+          <context context-type="linenumber">96,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5100621624412965322" datatype="html">
+        <source>Search books</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3016058313083701244" datatype="html">
+        <source> Вишлист </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5528455125454780504" datatype="html">
+        <source> Прочитал </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">30,31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7516834144888429078" datatype="html">
+        <source>Дата создания</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2980540573727805385" datatype="html">
+        <source>По убыванию</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">53,54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7976102352219400849" datatype="html">
+        <source>По возрастанию</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-filters-component/book-filters-component.html</context>
+          <context context-type="linenumber">58,59</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6741213171331814361" datatype="html">
+        <source>Не удалось загрузить книги</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-list-component/book-list-component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/services/book-service/book-service.ts</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5312713107322198368" datatype="html">
+        <source>Книги не найдены</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/pages/book-list-page/components/book-list-component/book-list-component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1935713778367155448" datatype="html">
+        <source>Не удалось загрузить книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/services/book-service/book-service.ts</context>
+          <context context-type="linenumber">93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8516483905370570727" datatype="html">
+        <source>Не удалось обновить книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/services/book-service/book-service.ts</context>
+          <context context-type="linenumber">138</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6085311144643609856" datatype="html">
+        <source>Не удалось создать книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/services/book-service/book-service.ts</context>
+          <context context-type="linenumber">160</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7538145728499911969" datatype="html">
+        <source>Не удалось удалить книгу</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/books/services/book-service/book-service.ts</context>
+          <context context-type="linenumber">182</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2668939571120092585" datatype="html">
+        <source><x id="routeTitle" equiv-text="routeTitle"/> | Мои книги</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/strategies/title-strategy.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
