@@ -1,11 +1,18 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { BookStatus, Book, BookFiltered, CreateBookDTO } from '../../model';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    effect,
+    inject,
+    signal,
+} from '@angular/core';
+import { BookStatus, Book, BookFiltered, BookSortField, CreateBookDTO } from '../../model';
 import { BookService } from '../../services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BookCreatorComponent } from './components/book-creator-component/book-creator-component';
 import { BookFiltersComponent } from './components/book-filters-component/book-filters-component';
-import { Sorted } from '../../../../shared/types';
+import { SortOrder } from '../../../../shared/types';
 import { BookListComponent } from './components/book-list-component/book-list-component';
 
 @Component({
@@ -16,7 +23,7 @@ import { BookListComponent } from './components/book-list-component/book-list-co
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookListPage {
-    public readonly booksService = inject(BookService)
+    public readonly booksService = inject(BookService);
     private router = inject(Router);
     private activatedRoute = inject(ActivatedRoute);
     private queryParamMap = toSignal(this.activatedRoute.queryParamMap);
@@ -27,9 +34,29 @@ export class BookListPage {
     protected selectedStatus = computed(() => {
         return this.getInitialStatus(this.queryParamMap()?.get('status'));
     });
-    protected sortOrder = computed(() => {
-        return this.getInitialSortOrder(this.queryParamMap()?.get('sorted'));
+    protected sortField = computed(() => {
+        return this.getInitialSortField(this.queryParamMap()?.get('sortField'));
     });
+    protected sortOrder = computed(() => {
+        return this.getInitialSortOrder(this.queryParamMap()?.get('sortOrder'));
+    });
+    protected page = computed(() => {
+        return this.getInitialPage(Number(this.queryParamMap()?.get('page')));
+    });
+    protected limit = computed(() => {
+        return this.getInitailLimit(Number(this.queryParamMap()?.get('limit')));
+    });
+
+    constructor() {
+        effect(() => {
+            this.booksService.loadBooks({
+                page: this.page(),
+                limit: this.limit(),
+                sortField: this.sortField(),
+                order: this.sortOrder(),
+            })
+        });
+    }
 
     protected changeBookStatus(book: Book): void {
         this.booksService.changeBookStatus(book);
@@ -56,9 +83,8 @@ export class BookListPage {
     }
 
     protected handleBookClick(id: string): void {
-        this.router.navigateByUrl(`/${String(id)}`)
+        this.router.navigateByUrl(`/${String(id)}`);
     }
-
 
     private getInitialStatus(status?: string | null): BookFiltered {
         switch (status) {
@@ -67,52 +93,85 @@ export class BookListPage {
             case 'finished':
                 return status;
             default:
-                return 'all'
+                return 'all';
         }
     }
 
-    private getInitialSortOrder(sortOrder?: string | null): Sorted {
+    private getInitialSortField(sortField?: string | null): BookSortField {
+        switch (sortField) {
+            case BookSortField.Title:
+            case BookSortField.CreatedAt:
+                return sortField;
+            default:
+                return BookSortField.CreatedAt;
+        }
+    }
+
+    private getInitialSortOrder(sortOrder?: string | null): SortOrder {
         switch (sortOrder) {
-            case Sorted.CreatedAsc:
-            case Sorted.CreatedDesc:
-            case Sorted.TitleAsc:
-            case Sorted.TitleDesc:
+            case SortOrder.Asc:
+            case SortOrder.Desc:
                 return sortOrder;
             default:
-                return Sorted.CreatedDesc;
+                return SortOrder.Desc;
         }
+    }
+    private getInitialPage(page?: number | null): number {
+        return Number.isFinite(page) && page ? page : 1;
+    }
+    private getInitailLimit(limit?: number | null): number {
+        return Number.isFinite(limit) && limit ? limit : 10;
     }
 
     protected handleChangeSearch(search: string): void {
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
             queryParams: { search: search || null },
-            queryParamsHandling: 'merge'
-        })
+            queryParamsHandling: 'merge',
+        });
     }
 
     protected handleChangeStatus(status: BookStatus): void {
         let newStatus = status as BookFiltered | undefined;
         if (status === this.selectedStatus()) {
-            newStatus = undefined
+            newStatus = undefined;
         }
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
             queryParams: { status: newStatus },
-            queryParamsHandling: 'merge'
-        })
+            queryParamsHandling: 'merge',
+        });
     }
 
-    protected handleChangeSortOrder(sortOrder: Sorted): void {
-        let newSortOrder = sortOrder as Sorted | undefined;
-        if (newSortOrder === this.sortOrder()) {
-            newSortOrder = undefined
-        }
+    protected handleChangeSortField(sortField: BookSortField): void {
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
-            queryParams: { sorted: newSortOrder },
-            queryParamsHandling: 'merge'
-        })
+            queryParams: { sortField },
+            queryParamsHandling: 'merge',
+        });
     }
 
+    protected handleChangeSortOrder(sortOrder: SortOrder): void {
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { sortOrder },
+            queryParamsHandling: 'merge',
+        });
+    }
+
+    protected handleChangePage(page: number): void {
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { page },
+            queryParamsHandling: 'merge',
+        });
+    }
+
+    protected handleChangeLimit(limit: number): void {
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { limit },
+            queryParamsHandling: 'merge',
+        });
+    }
 }

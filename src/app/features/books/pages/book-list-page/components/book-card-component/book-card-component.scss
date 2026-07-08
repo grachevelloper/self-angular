@@ -1,40 +1,36 @@
-.book {
-  height: 400px;
-  width: 250px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 1px solid gold;
-  background-color: wheat;
-  cursor: pointer;
+:host {
+    display: block;
 }
 
-.status,
-.delete {
-  align-self: flex-end;
-  font-size: 12px;
-  padding: 8px;
-  border: none;
-  cursor: pointer;
+.book-card {
+    height: 400px;
+    cursor: pointer;
 }
 
-.status {
-  background-color: yellowgreen;
+.book-card__content {
+    min-height: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 8px;
 }
 
-.delete {
-  margin-top: 8px;
-  background-color: tomato;
-  color: white;
+.book-card__title {
+    width: 100%;
+    margin: 0;
+    font-size: 16px;
 }
 
-.status:disabled,
-.delete:disabled {
-  cursor: wait;
-  opacity: 0.7;
+.book-card__author {
+    width: 100%;
+    margin: 0;
 }
 
-.title {
-  font-size: 16px;
+.book-card__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
 }

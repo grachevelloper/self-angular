@@ -1,29 +1,53 @@
-<div
-    class="book"
+<nz-card
+    class="book-card"
+    nzHoverable
+    [nzBodyStyle]="{ height: '100%', display: 'flex', flexDirection: 'column' }"
     (click)="clicked.emit()"
 >
-  <h3 class="title">{{ book().title }}</h3>
-  <p class="author">{{ book().author }}</p>
-  <button
-    class="status"
-    [disabled]="isUpdating() || isDeleting()"
-    (click)="$event.stopPropagation(); statusClicked.emit(book())"
-  >
-    @if (isUpdating()) {
-      Обновляем...
-    } @else {
-      {{ book().status }}
-    }
-  </button>
-  <button
-    class="delete"
-    [disabled]="isUpdating() || isDeleting()"
-    (click)="$event.stopPropagation(); deleteClicked.emit(book())"
-  >
-    @if (isDeleting()) {
-      Удаляем...
-    } @else {
-      Удалить
-    }
-  </button>
-</div>
+    <div class="book-card__content">
+        <h3
+            class="book-card__title"
+            nz-typography
+        >
+            {{ book().title }}
+        </h3>
+        <p
+            class="book-card__author"
+            nz-typography
+            nzType="secondary"
+        >
+            {{ book().author }}
+        </p>
+        <nz-tag [nzColor]="statusColor(book().status)">
+            {{ statusLabel(book().status) }}
+        </nz-tag>
+    </div>
+
+    <div class="book-card__actions">
+        <button
+            nz-button
+            nzSize="small"
+            [disabled]="isUpdating() || isDeleting()"
+            (click)="$event.stopPropagation(); statusClicked.emit(book())"
+        >
+            @if (isUpdating()) {
+                Обновляем...
+            } @else {
+                Сменить статус
+            }
+        </button>
+        <button
+            nz-button
+            nzDanger
+            nzSize="small"
+            [disabled]="isUpdating() || isDeleting()"
+            (click)="$event.stopPropagation(); deleteClicked.emit(book())"
+        >
+            @if (isDeleting()) {
+                Удаляем...
+            } @else {
+                Удалить
+            }
+        </button>
+    </div>
+</nz-card>

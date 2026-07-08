@@ -1,9 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { API_BASE_URL } from '../../../../shared/providers';
-import { Book, CreateBookDTO, UpdateBookDTO } from '../../model';
+import { Book, BookSortField, CreateBookDTO, UpdateBookDTO } from '../../model';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
+import { PaginatedResponse } from '../../../../shared/types';
+import { PaginatedQuery } from '../../../../shared/types/dto';
 
 @Injectable({
     providedIn: 'root',
@@ -12,8 +14,12 @@ export class BookApiService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = `${inject(API_BASE_URL)}/books`;
 
-    getAll(): Observable<Book[]> {
-        return this.http.get<Book[]>(this.apiUrl);
+    getAll({
+        page, limit, sortField, order
+    }: PaginatedQuery<BookSortField>): Observable<PaginatedResponse<Book>> {
+        return this.http.get<PaginatedResponse<Book>>(this.apiUrl, {
+            params: { page, limit, sort_field: sortField, order }
+        });
     }
 
     getById(id: string): Observable<Book> {

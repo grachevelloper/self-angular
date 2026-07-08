@@ -14,7 +14,8 @@ describe('BookListComponent', () => {
         fixture = TestBed.createComponent(BookListComponent);
         component = fixture.componentInstance;
         fixture.componentRef.setInput('selectedStatus', 'all');
-        fixture.componentRef.setInput('sortOrder', 'created_desc');
+        fixture.componentRef.setInput('sortField', 'createdAt');
+        fixture.componentRef.setInput('sortOrder', 'desc');
         await fixture.whenStable();
     });
 

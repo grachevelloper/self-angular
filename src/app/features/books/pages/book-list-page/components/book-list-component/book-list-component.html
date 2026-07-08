@@ -1,22 +1,64 @@
-<div class="row">
+<section class="book-list">
     @let books = filteredBooks();
 
-    @if (isLoading()) {
-        <p>Loading...</p>
-    } @else if (loadError()) {
-        <p class="error">{{ loadError() }}</p>
-    } @else if (books.length === 0) {
-        <p class="empty">Книги не найдены</p>
-    } @else {
-        @for (book of books; track book.id) {
-            <app-book-card
-                [book]="book"
-                [isUpdating]="updatingBookIds().has(book.id)"
-                [isDeleting]="deletingBookIds().has(book.id)"
-                (clicked)="clicked.emit(book.id)"
-                (statusClicked)="statusClicked.emit($event)"
-                (deleteClicked)="deleteClicked.emit($event)"
+    <div
+        class="book-list__grid"
+        nz-row
+        nzJustify="center"
+        [nzGutter]="[16, 16]"
+    >
+        @if (isLoading()) {
+            @for (_ of skeletonBooks(); track $index) {
+                <div
+                    nz-col
+                    nzFlex="266px"
+                >
+                    <app-book-card-skeleton />
+                </div>
+            }
+        } @else if (loadError()) {
+            <nz-alert
+                class="state"
+                nzType="error"
+                nzMessage="Не удалось загрузить книги"
+                [nzDescription]="loadError()"
+                nzShowIcon
             />
+        } @else if (books.length === 0) {
+            <nz-empty
+                class="state"
+                nzNotFoundContent="Книги не найдены"
+            />
+        } @else {
+            @for (book of books; track book.id) {
+                <div
+                    nz-col
+                    nzFlex="266px"
+                >
+                    <app-book-card
+                        [book]="book"
+                        [isUpdating]="updatingBookIds().has(book.id)"
+                        [isDeleting]="deletingBookIds().has(book.id)"
+                        (clicked)="clicked.emit(book.id)"
+                        (statusClicked)="statusClicked.emit($event)"
+                        (deleteClicked)="deleteClicked.emit($event)"
+                    />
+                </div>
+            }
         }
-    }
-</div>
+    </div>
+
+    <footer class="book-list__pagination">
+        <nz-pagination
+            [nzPageIndex]="page()"
+            [nzPageSize]="limit()"
+            [nzTotal]="total()"
+            [nzShowSizeChanger]="true"
+            [nzPageSizeOptions]="[10, 50, 100, 500]"
+            [nzResponsive]="true"
+            nzAlign="center"
+            (nzPageIndexChange)="paginationPageSelected.emit($event)"
+            (nzPageSizeChange)="paginationLimitSelected.emit($event)"
+        />
+    </footer>
+</section>

@@ -12,7 +12,6 @@ export class AppTitleStrategy extends TitleStrategy {
         const routeTitle = this.buildTitle(routerState);
 
         if (routeTitle) {
-            console.log(routeTitle)
             this.title.setTitle(`${routeTitle} | Мои книги`);
         } else {
             this.title.setTitle('Мои книги');

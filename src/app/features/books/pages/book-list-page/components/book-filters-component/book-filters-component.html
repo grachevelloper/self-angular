@@ -25,26 +25,30 @@
     >
         Прочитал
     </button>
-
     <nz-select
-        [ngModel]="sorted()"
+        [ngModel]="sortField()"
+        (ngModelChange)="onSortFieldSelected($event)"
+    >
+        <nz-option
+            [nzValue]="BookSortField.CreatedAt"
+            nzLabel="Дата создания"
+        />
+        <nz-option
+            [nzValue]="BookSortField.Title"
+            nzLabel="Название"
+        />
+    </nz-select>
+    <nz-select
+        [ngModel]="sortOrder()"
         (ngModelChange)="onSortOrderSelected($event)"
     >
         <nz-option
-            [nzValue]="Sorted.CreatedDesc"
-            nzLabel="По убыванию времени создания"
+            [nzValue]="SortOrder.Desc"
+            nzLabel="По убыванию"
         />
         <nz-option
-            [nzValue]="Sorted.CreatedAsc"
-            nzLabel="По возрастанию времени создания"
-        />
-        <nz-option
-            [nzValue]="Sorted.TitleAsc"
-            nzLabel="По возрастанию алфавита"
-        />
-        <nz-option
-            [nzValue]="Sorted.TitleDesc"
-            nzLabel="По убыванию алфавита"
+            [nzValue]="SortOrder.Asc"
+            nzLabel="По возрастанию"
         />
     </nz-select>
 </nav>

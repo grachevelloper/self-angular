@@ -1,6 +1,12 @@
-export enum Sorted {
-    CreatedDesc = 'created_desc',
-    CreatedAsc = 'created_asc',
-    TitleAsc = 'title_asc',
-    TitleDesc = 'title_desc'
+export enum SortOrder {
+    Desc = 'desc',
+    Asc = 'asc',
+}
+
+export type PaginatedResponse<T> = {
+    items: T[]
+    page: number
+    total: number
+    limit: number
+    has_next: boolean
 }

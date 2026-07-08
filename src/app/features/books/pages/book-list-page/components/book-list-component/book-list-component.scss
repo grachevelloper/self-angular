@@ -1,7 +1,35 @@
-.row {
+:host {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+}
+
+.book-list {
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.book-list__grid {
+    max-width: 1330px;
+    margin-inline: auto;
+    margin: 0 auto;
+}
+
+.state {
+    width: min(100%, 720px);
+    min-height: 220px;
+    margin: 24px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
-    gap: 1rem;
+}
+
+.book-list__pagination {
+    width: 100%;
+    margin-top: auto;
+    padding: 16px 0;
+    background: #fff;
 }

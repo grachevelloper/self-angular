@@ -1,0 +1,23 @@
+:host {
+    display: block;
+    height: 400px;
+}
+
+nz-card {
+    height: 100%;
+}
+
+.book-card-skeleton__content {
+    min-height: 0;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book-card-skeleton__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}

@@ -1,0 +1,22 @@
+<nz-card [nzBodyStyle]="{ height: '100%', display: 'flex', flexDirection: 'column' }">
+    <div class="book-card-skeleton__content">
+        <nz-skeleton
+            [nzActive]="true"
+            [nzTitle]="{ width: '82%' }"
+            [nzParagraph]="{ rows: 2, width: ['68%', '54%'] }"
+        />
+    </div>
+
+    <div class="book-card-skeleton__actions">
+        <nz-skeleton-element
+            nzType="button"
+            nzSize="small"
+            [nzActive]="true"
+        />
+        <nz-skeleton-element
+            nzType="button"
+            nzSize="small"
+            [nzActive]="true"
+        />
+    </div>
+</nz-card>

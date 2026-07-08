@@ -2,10 +2,12 @@
     <book-filters
         [selectedStatus]="selectedStatus()"
         [searchQuery]="searchQuery()"
-        [sorted]="sortOrder()"
+        [sortField]="sortField()"
+        [sortOrder]="sortOrder()"
         (statusSelected)="handleChangeStatus($event)"
         (searchChanged)="handleChangeSearch($event)"
-        (sortedChanged)="handleChangeSortOrder($event)"
+        (sortFieldChanged)="handleChangeSortField($event)"
+        (sortOrderChanged)="handleChangeSortOrder($event)"
     />
     @if (booksService.actionError()) {
         <p class="error">{{ booksService.actionError() }}</p>
@@ -15,7 +17,11 @@
         [books]="booksService.books()"
         [selectedStatus]="selectedStatus()"
         [searchQuery]="searchQuery()"
+        [sortField]="sortField()"
         [sortOrder]="sortOrder()"
+        [page]="page()"
+        [limit]="limit()"
+        [total]="booksService.totalBooks()"
         [isLoading]="booksService.loadingBooks()"
         [loadError]="booksService.loadBooksError()"
         [updatingBookIds]="booksService.updatingBookIds()"
@@ -23,6 +29,8 @@
         (clicked)="handleBookClick($event)"
         (statusClicked)="changeBookStatus($event)"
         (deleteClicked)="deleteBook($event)"
+        (paginationLimitSelected)="handleChangeLimit($event)"
+        (paginationPageSelected)="handleChangePage($event)"
     />
 
     <button

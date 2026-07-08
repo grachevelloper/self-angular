@@ -1,6 +1,11 @@
-export * from './dto'
+export * from './dto';
 
 export type BookStatus = 'reading' | 'finished' | 'in_wishlist';
+
+export enum BookSortField {
+    Title = 'title',
+    CreatedAt = 'created_at',
+}
 
 export interface Book {
     id: string;
@@ -8,10 +13,8 @@ export interface Book {
     author: string;
     status: BookStatus;
     publishedAt: Date;
-    createdAt: Date
-    updatedAt?: Date
+    createdAt: Date;
+    updatedAt?: Date;
 }
 
 export type BookFiltered = BookStatus | 'all';
-
-

@@ -1,9 +1,9 @@
 import { Component, DestroyRef, effect, inject, input, output } from '@angular/core';
-import { BookFiltered, BookStatus } from '../../../../model';
+import { BookFiltered, BookSortField, BookStatus } from '../../../../model';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
-import { Sorted } from '../../../../../../shared/types';
+import { SortOrder } from '../../../../../../shared/types';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 
@@ -11,14 +11,16 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     selector: 'book-filters',
     templateUrl: './book-filters-component.html',
     styleUrl: './book-filters-component.scss',
-    imports: [FormsModule, ReactiveFormsModule, NzButtonModule, NzSelectModule]
+    imports: [FormsModule, ReactiveFormsModule, NzButtonModule, NzSelectModule],
 })
 export class BookFiltersComponent {
-    protected readonly Sorted = Sorted;
+    protected readonly BookSortField = BookSortField;
+    protected readonly SortOrder = SortOrder;
 
     public readonly selectedStatus = input.required<BookFiltered>();
     public readonly searchQuery = input.required<string>();
-    public readonly sorted = input.required<Sorted>();
+    public readonly sortField = input.required<BookSortField>();
+    public readonly sortOrder = input.required<SortOrder>();
 
     private readonly destroyRef = inject(DestroyRef);
 
@@ -26,7 +28,8 @@ export class BookFiltersComponent {
 
     public readonly statusSelected = output<BookStatus>();
     public readonly searchChanged = output<string>();
-    public readonly sortedChanged = output<Sorted>();
+    public readonly sortFieldChanged = output<BookSortField>();
+    public readonly sortOrderChanged = output<SortOrder>();
 
     constructor() {
         effect(() => {
@@ -38,11 +41,7 @@ export class BookFiltersComponent {
         });
 
         this.searchControl.valueChanges
-            .pipe(
-                debounceTime(300),
-                distinctUntilChanged(),
-                takeUntilDestroyed(this.destroyRef),
-            )
+            .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
             .subscribe((query) => {
                 this.searchChanged.emit(query);
             });
@@ -51,7 +50,12 @@ export class BookFiltersComponent {
     public onStatusSelected(status: BookStatus): void {
         this.statusSelected.emit(status);
     }
-    public onSortOrderSelected(order: Sorted): void {
-        this.sortedChanged.emit(order);
+
+    public onSortFieldSelected(field: BookSortField): void {
+        this.sortFieldChanged.emit(field);
+    }
+
+    public onSortOrderSelected(order: SortOrder): void {
+        this.sortOrderChanged.emit(order);
     }
 }
